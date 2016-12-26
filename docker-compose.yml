@@ -1,0 +1,10 @@
+version: '2'
+services:
+  django:
+    build: ./
+    ports:
+      - 80:8000
+    volumes:
+      - ./:/mnt
+    working_dir: /mnt
+    command: python manage.py runserver 0.0.0.0:8000
