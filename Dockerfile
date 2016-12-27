@@ -1,7 +1,10 @@
 FROM python:3.5.2-alpine
 
-RUN apk update && \
-    apk add --no-cache gcc postgresql-dev musl-dev postgresql-client
-
 ADD requirements.txt /
-RUN pip install -r requirements.txt
+
+RUN apk update && \
+    apk add --virtual build-dependencies --no-cache gcc postgresql-dev musl-dev && \
+    pip install -r requirements.txt && \
+    apk del build-dependencies
+
+RUN apk add --no-cache postgresql-client
